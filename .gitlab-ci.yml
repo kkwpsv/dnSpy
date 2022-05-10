@@ -1,0 +1,25 @@
+before_script:
+  - chcp 65001
+
+variables:
+  GIT_SUBMODULE_STRATEGY: recursive
+  
+stages:
+  - build
+  - pack
+
+build:
+  stage: build
+  script:
+    - ".\\buildAll.ps1"
+  artifacts:
+    paths:
+      - "dnSpy\\dnSpy\\bin\\Release"
+    expire_in: 1h
+
+pack:
+  stage: pack
+  # only:
+  #   - master
+  script:
+    - ".\\pack.ps1"
