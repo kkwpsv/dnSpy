@@ -27,6 +27,13 @@ namespace dnSpy.Debugger.DotNet.Metadata {
 	}
 
 	/// <summary>
+	/// Null metadata
+	/// </summary>
+	public class DmdLazyMetadataBytesNull : DmdLazyMetadataBytes {
+
+	}
+
+	/// <summary>
 	/// Metadata in a <see cref="byte"/> array
 	/// </summary>
 	public sealed class DmdLazyMetadataBytesArray : DmdLazyMetadataBytes {

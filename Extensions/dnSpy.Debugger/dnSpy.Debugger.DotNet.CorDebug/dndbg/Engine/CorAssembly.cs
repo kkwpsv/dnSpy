@@ -19,7 +19,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Text;
 using dndbg.COM.CorDebug;
 using dndbg.COM.MetaData;
@@ -33,7 +32,7 @@ namespace dndbg.Engine {
 				int hr = obj.EnumerateModules(out var moduleEnum);
 				if (hr < 0)
 					yield break;
-				for (;;) {
+				for (; ; ) {
 					hr = moduleEnum.Next(1, out var module, out uint count);
 					if (hr != 0 || module is null)
 						break;
@@ -54,7 +53,8 @@ namespace dndbg.Engine {
 		public string FullName {
 			get {
 				var module = ManifestModule;
-				Debug2.Assert(module is not null);
+				// "Anonymously Hosted DynamicMethods Assembly" ManifestModule will be null.
+				// Debug2.Assert(module is not null);
 				if (module is null)
 					return Name;
 				return CalculateFullName(module);

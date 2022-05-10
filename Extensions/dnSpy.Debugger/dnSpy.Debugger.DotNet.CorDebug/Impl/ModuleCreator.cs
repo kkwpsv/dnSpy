@@ -93,7 +93,8 @@ namespace dnSpy.Debugger.DotNet.CorDebug.Impl {
 			Debug.Assert(dnModule.IsDynamic);
 			var comMetadata = dnModule.CorModule.GetMetaDataInterface<IMetaDataImport2>();
 			if (comMetadata is null)
-				throw new InvalidOperationException();
+				// "Anonymously Hosted DynamicMethods Assembly" not implement IMetaDataImport2, we just return DmdLazyMetadataBytesNull
+				return () => new DmdLazyMetadataBytesNull();
 			var result = new DmdLazyMetadataBytesCom(comMetadata, engine.GetDynamicModuleHelper(dnModule), engine.DmdDispatcher);
 			return () => result;
 		}
