@@ -1,3 +1,6 @@
+before_script:
+  - chcp 65001
+
 stages:
   - build
   - pack
